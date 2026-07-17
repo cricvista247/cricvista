@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 239, 246, 255; /* Light blue */
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 10, 25, 47; /* Dark blue */
+    --background-end-rgb: 30, 58, 138;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 210 100% 98%; /* Light blue background */
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%; /* Blue primary color */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%; /* Blue ring color */
+    --chart-1: 221.2 83.2% 53.3%; /* Blue */
+    --chart-2: 212 96% 78%; /* Light blue */
+    --chart-3: 217 91% 60%; /* Medium blue */
+    --chart-4: 199 89% 48%; /* Darker blue */
+    --chart-5: 234 89% 74%; /* Purple-blue */
+    --radius: 1.125rem;
+  }
+  .dark {
+    --background: 222.2 84% 4.9%; /* Dark blue background */
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%; /* Brighter blue for dark mode */
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%; /* Blue ring for dark mode */
+    --chart-1: 221.2 83.2% 53.3%;
+    --chart-2: 212 96% 78%;
+    --chart-3: 217 91% 60%;
+    --chart-4: 199 89% 48%;
+    --chart-5: 234 89% 74%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Global background gradient */
+    background: linear-gradient(
+      135deg,
+      hsl(210, 100%, 98%) 0%,
+      hsl(210, 100%, 96%) 50%,
+      hsl(210, 100%, 94%) 100%
+    );
+    min-height: 100vh;
+  }
+
+  /* Dark mode background */
+  .dark body {
+    background: linear-gradient(
+      135deg,
+      hsl(222.2, 84%, 4.9%) 0%,
+      hsl(222.2, 84%, 6.9%) 50%,
+      hsl(222.2, 84%, 8.9%) 100%
+    );
+  }
+}
+
+@layer components {
+  /* Common page background classes */
+  .page-bg {
+    @apply bg-gradient-to-br from-blue-50 via-indigo-50 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-gray-900;
+  }
+
+  .auth-bg {
+    @apply bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700;
+  }
+
+  .card-bg {
+    @apply bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm;
+  }
+
+  .sidebar-bg {
+    @apply bg-gradient-to-b from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-slate-800;
+  }
+
+  .dashboard-bg {
+    @apply bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-gray-900;
+  }
+
+  .matches-bg {
+    @apply bg-gradient-to-b from-slate-50 to-blue-50 dark:from-slate-900 dark:to-gray-900;
+  }
+}
+
+@layer utilities {
+  /* Scrollbar styling */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-blue::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scrollbar-blue::-webkit-scrollbar-track {
+    @apply bg-blue-100 dark:bg-slate-800;
+  }
+
+  .scrollbar-blue::-webkit-scrollbar-thumb {
+    @apply bg-blue-400 dark:bg-blue-600 rounded-full;
+  }
+
+  /* Text gradients */
+  .text-gradient-blue {
+    @apply bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-purple {
+    @apply bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent;
+  }
+
+  /* Background gradients */
+  .bg-gradient-blue {
+    @apply bg-gradient-to-r from-blue-500 to-indigo-600;
+  }
+
+  .bg-gradient-purple-blue {
+    @apply bg-gradient-to-r from-purple-600 to-blue-600;
+  }
+
+  /* Glass effect */
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+
+  .glass-card {
+    @apply bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50;
+  }
+
+  /* Shadows */
+  .shadow-blue {
+    box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.1);
+  }
+
+  .shadow-blue-lg {
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+  }
+}
+
+/* CricVista brand spacing utilities */
+.section-spacing {
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+
+.card-padding {
+  padding: 24px;
+}
+
+.card-gap {
+  gap: 24px;
+}
+
+.grid-gap {
+  gap: 32px;
+}
+
+.container-cv {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* CricVista hover effect */
+.hover-lift {
+  transition: all 300ms ease;
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+}
+
+/* Button default height */
+.btn-cv {
+  height: 48px;
+  border-radius: 12px;
+}
+
+/* Custom animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Smooth transitions */
+* {
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}

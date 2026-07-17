@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: sport-predict
+    runtime: node
+    buildCommand: npm ci --legacy-peer-deps && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
