@@ -1,11 +1,22 @@
 import express from "express";
 import { createServer } from "http";
+import os from "os";
 import next from "next";
 import { Server } from "socket.io";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = process.env.HOST || "0.0.0.0";
 const port = Number(process.env.PORT) || 3004;
+
+function getLocalIP(): string {
+  const ifaces = os.networkInterfaces();
+  for (const name of Object.keys(ifaces)) {
+    for (const iface of ifaces[name] ?? []) {
+      if (iface.family === "IPv4" && !iface.internal) return iface.address;
+    }
+  }
+  return "localhost";
+}
 
 const nextApp = next({ dev, hostname, port });
 const handle = nextApp.getRequestHandler();
@@ -96,9 +107,10 @@ async function startServer() {
   app.use((req, res) => handle(req, res));
 
   httpServer.listen(port, hostname, () => {
-    console.log(
-      `> Next.js and Socket.IO ready on http://${hostname}:${port}`,
-    );
+    const localIP = getLocalIP();
+    console.log(`> Next.js and Socket.IO ready`);
+    console.log(`> Local:   http://localhost:${port}`);
+    console.log(`> Network: http://${localIP}:${port}`);
   });
 }
 

@@ -2,7 +2,7 @@ import puppeteer from "puppeteer";
 import puppeteerCore from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
 
-const isProd = process.env.NEXT_PUBLIC_NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === "production";
 
 export async function getBrowser() {
   if (isProd) {
