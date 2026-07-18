@@ -41,3 +41,4 @@
 - `process.env.NODE_ENV` is automatically `"production"` during `next build` / production deploy — no manual env var needed.
 - `getLocalIP()` finds the first non-internal IPv4 address (e.g. `192.168.x.x`).
 - Add new entries to this log as changes are made.
+- Deploy
