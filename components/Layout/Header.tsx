@@ -126,24 +126,9 @@ const Header = () => {
         );
       });
   };
-  // App download links - Replace with your actual links
-  const appDownloadLinks = {
-    android:
-      "https://drive.google.com/file/d/1rKrI2IMsONcscbvsiRvjqv-xjWZa4J5-/view?usp=drive_link", // Replace with your Android app Google Drive link
-    ios: "https://drive.google.com/your-ios-app-link", // Replace with your iOS app Google Drive link
-  };
-
   const handleLogout = () => {
     dispatch(logout());
     router.push("/");
-  };
-
-  const handleAppDownload = (platform: "android" | "ios") => {
-    // const link = appDownloadLinks[platform];
-    // if (link) {
-    //   window.open(link, "_blank", "noopener,noreferrer");
-    // }
-    window.location.href = "/apps/sport-predict-android.apk";
   };
 
   const navItems = [
@@ -258,7 +243,7 @@ const Header = () => {
               })}
 
               {/* Desktop App Download Dropdown */}
-              <DropdownMenu>
+              {/* <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
@@ -304,7 +289,7 @@ const Header = () => {
                     </div>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
-              </DropdownMenu>
+              </DropdownMenu> */}
             </nav>
 
             {/* Auth Section */}
@@ -556,7 +541,7 @@ const Header = () => {
                       </DropdownMenuItem> */}
 
                       {/* App Download in User Dropdown */}
-                      <DropdownMenuItem
+                      {/* <DropdownMenuItem
                         className="cursor-pointer flex items-center py-2.5 sm:py-3 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 transition-all"
                         onClick={() => handleAppDownload("android")}
                       >
@@ -571,7 +556,7 @@ const Header = () => {
                             Get mobile app for better experience
                           </div>
                         </div>
-                      </DropdownMenuItem>
+                      </DropdownMenuItem> */}
 
                       {user.role === "admin" && (
                         <>
@@ -671,7 +656,7 @@ const Header = () => {
               ) : (
                 <>
                   {/* Desktop App Download Button for Non-Authenticated Users */}
-                  <div className="hidden lg:block">
+                  {/* <div className="hidden lg:block">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button
@@ -706,7 +691,7 @@ const Header = () => {
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
-                  </div>
+                  </div> */}
 
                   {/* Auth Buttons */}
                   <div className="flex items-center space-x-1.5 sm:space-x-2">
@@ -816,7 +801,7 @@ const Header = () => {
                         })}
 
                         {/* Mobile App Download Section */}
-                        <div className="p-2.5 sm:p-3 mx-1 sm:mx-2 border-t mt-3 sm:mt-4">
+                        {/* <div className="p-2.5 sm:p-3 mx-1 sm:mx-2 border-t mt-3 sm:mt-4">
                           <div className="flex items-center mb-2">
                             <Download className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mr-2" />
                             <span className="font-semibold text-gray-900 text-sm sm:text-base">
@@ -851,7 +836,7 @@ const Header = () => {
                               <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-gray-400" />
                             </button>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
 
                       {/* Mobile Auth Actions */}
