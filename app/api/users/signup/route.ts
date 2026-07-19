@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
         if (otpToken) {
           await MailSend({
             to: [body.email],
-            subject: "Unlock Predictions - CricVista Email Verification OTP",
+            subject: "CricVista: Verify Your Email Address",
             html: RegistrationOTP({
               otp: otp,
             }),

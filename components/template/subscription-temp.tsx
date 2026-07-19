@@ -28,7 +28,7 @@ const getUserName = (data: any): string =>
   data.username || data.user?.name || data.name || "there";
 
 export const UserPaymentConfirmationTemp = (data: any) => {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://cricvista.netlify.app";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://www.cricvista247.in";
 
   return EmailLayout({
     title: "Payment Submitted",
@@ -53,7 +53,7 @@ export const UserPaymentConfirmationTemp = (data: any) => {
 };
 
 export const AdminPaymentConfirmationTemp = (data: any) => {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://cricvista.netlify.app";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://www.cricvista247.in";
 
   return EmailLayout({
     title: "New Payment Received",
@@ -76,7 +76,7 @@ export const AdminPaymentConfirmationTemp = (data: any) => {
 };
 
 export const PaymentVerifiedTem = (data: any) => {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://cricvista.netlify.app";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://www.cricvista247.in";
 
   return EmailLayout({
     title: "Payment Verified",
@@ -99,7 +99,7 @@ export const PaymentVerifiedTem = (data: any) => {
 };
 
 export const PaymentFailedTem = (data: any) => {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://cricvista.netlify.app";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://www.cricvista247.in";
 
   return EmailLayout({
     title: "Payment Failed",

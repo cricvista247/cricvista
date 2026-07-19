@@ -41,4 +41,40 @@
 - `process.env.NODE_ENV` is automatically `"production"` during `next build` / production deploy — no manual env var needed.
 - `getLocalIP()` finds the first non-internal IPv4 address (e.g. `192.168.x.x`).
 - Add new entries to this log as changes are made.
-- Deploy
+
+## 2026-07-19 — Email deliverability (OTP going to spam)
+
+### Problem
+- OTP emails for registration and password reset landing in users' spam folders
+- Root causes: Gmail SMTP from free `@gmail.com` address, spam-trigger subject lines, missing auth headers
+
+### Changes
+
+| File | Change |
+|---|---|
+| `lib/MailSend.ts` | Rewritten with dual-provider support: SendGrid API (via `SENDGRID_API_KEY`) as primary, Gmail SMTP as fallback. Added `X-Priority`, `Feedback-ID` headers |
+| `app/api/users/signup/route.ts:76` | Subject `"Unlock Predictions - CricVista Email Verification OTP"` → `"CricVista: Verify Your Email Address"` |
+| `app/api/users/reset-password/route.ts:68` | Subject `"Unlock Predictions - CricVista Email Verification OTP"` → `"CricVista: Password Reset Code"` |
+| `components/template/EmailLayout.ts:150` | Added physical address `"CricVista, India"` to footer (CAN-SPAM) |
+
+### How to fix spam issue (3 options)
+
+**Option 1 (Recommended) — Use SendGrid**
+1. Sign up at https://sendgrid.com (free tier: 100 emails/day)
+2. Create API key with "Mail Send" permission
+3. Add to Render env vars: `SENDGRID_API_KEY=your_key`
+4. Emails auto-route through SendGrid. No code changes needed.
+
+**Option 2 — Custom domain email**
+1. Buy a domain and create email (e.g., `noreply@cricvista.com`)
+2. Add SPF, DKIM, DMARC DNS records
+3. Update `MAIL_USER`, `MAIL_PASSWORD`, `MAIL_FROM_NAME` env vars
+
+**Option 3 — Warm up Gmail account**
+1. Send a few emails daily from `cricvista247@gmail.com`
+2. Ask recipients to mark as "Not Spam"
+
+### Key details
+- `MailSend.ts` tries SendGrid first (if `SENDGRID_API_KEY` set), falls back to SMTP.
+- SendGrid handles DKIM signing automatically.
+- The word "Unlock" is a known spam trigger — all subjects now avoid marketing language.

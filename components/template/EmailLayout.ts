@@ -1,4 +1,4 @@
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://cricvista.netlify.app";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://www.cricvista247.in";
 const SUPPORT_EMAIL = process.env.NEXT_PUBLIC_EMAIL || "cricvista247@gmail.com";
 const BRAND_COLOR = "#2563EB";
 const GRADIENT = "linear-gradient(135deg, #2563EB 0%, #4F46E5 50%, #7C3AED 100%)";
@@ -147,6 +147,7 @@ export const EmailFooter = (): string => `
           <td align="center" style="padding-bottom: 8px;">
             <p style="margin: 0; font-size: 12px; color: #94A3B8; line-height: 1.5;">
               You are receiving this email because you have an account with CricVista.<br>
+              CricVista, India<br>
               © ${new Date().getFullYear()} CricVista. All rights reserved.
             </p>
           </td>

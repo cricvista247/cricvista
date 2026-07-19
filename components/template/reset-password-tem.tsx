@@ -10,7 +10,7 @@ import {
 } from "./EmailLayout";
 
 export const ResetPasswordTem = (data: any) => {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://cricvista.netlify.app";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://www.cricvista247.in";
 
   return EmailLayout({
     title: "Reset Your Password",
@@ -29,7 +29,7 @@ export const ResetPasswordTem = (data: any) => {
 };
 
 export const ResetPasswordSuccessTem = (data: any) => {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://cricvista.netlify.app";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://www.cricvista247.in";
 
   return EmailLayout({
     title: "Password Reset Successful",

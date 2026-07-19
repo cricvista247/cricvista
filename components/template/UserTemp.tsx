@@ -15,8 +15,11 @@ const getUserName = (data: any): string =>
 
 export const UserAccountClosureTemp = (data: any) => {
   const isBanned = data.status === "banned";
-  const title = isBanned ? "Account Permanently Banned" : "Account Temporarily Suspended";
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://cricvista.netlify.app";
+  const title = isBanned
+    ? "Account Permanently Banned"
+    : "Account Temporarily Suspended";
+  const appUrl =
+    process.env.NEXT_PUBLIC_APP_URL || "https://www.cricvista247.in";
 
   return EmailLayout({
     title,
@@ -55,7 +58,8 @@ export const UserAccountClosureTemp = (data: any) => {
 };
 
 export const UserWelcomeTemp = (data: any) => {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://cricvista.netlify.app";
+  const appUrl =
+    process.env.NEXT_PUBLIC_APP_URL || "https://www.cricvista247.in";
 
   return EmailLayout({
     title: "Welcome to CricVista",
@@ -95,7 +99,8 @@ export const UserWelcomeTemp = (data: any) => {
 };
 
 export const RegistrationOTP = (data: any) => {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://cricvista.netlify.app";
+  const appUrl =
+    process.env.NEXT_PUBLIC_APP_URL || "https://www.cricvista247.in";
 
   return EmailLayout({
     title: "Verify Your Email",
@@ -107,14 +112,15 @@ export const RegistrationOTP = (data: any) => {
       ${EmailSecurityNote()}
       <p style="margin: 16px 0 0; font-size: 13px; color: #94A3B8; text-align: center;">
         You can also paste this link in your browser if the button doesn&#39;t work:<br>
-        <a href="${appUrl}/verify-email?otp=${data.otp}" style="color: #2563EB; font-size: 12px; word-break: break-all;">${appUrl}/verify-email?otp=${data.otp}</a>
+        <a href="${appUrl}" style="color: #2563EB; font-size: 12px; word-break: break-all;">${appUrl}</a>
       </p>
     `,
   });
 };
 
 export const AdminDepositCreditsEmail = (data: any) => {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://cricvista.netlify.app";
+  const appUrl =
+    process.env.NEXT_PUBLIC_APP_URL || "https://www.cricvista247.in";
 
   return EmailLayout({
     title: "Deposit Confirmed",
@@ -123,8 +129,14 @@ export const AdminDepositCreditsEmail = (data: any) => {
       ${EmailTitle("Deposit Successful 💰")}
       ${EmailText("Your deposit has been confirmed and the credits have been added to your account. You can now use these credits to access premium analytics and insights.")}
       ${EmailInfoCard([
-        { label: "Amount", value: `₹${data.amount || data.totalCreditsAdded || 0}` },
-        { label: "Credits Added", value: `${data.totalCreditsAdded || data.credits || 0} Credits` },
+        {
+          label: "Amount",
+          value: `₹${data.amount || data.totalCreditsAdded || 0}`,
+        },
+        {
+          label: "Credits Added",
+          value: `${data.totalCreditsAdded || data.credits || 0} Credits`,
+        },
         { label: "Date", value: data.date || new Date().toLocaleDateString() },
       ])}
       ${EmailButton(`${appUrl}/dashboard`, "View My Credits")}
@@ -133,7 +145,8 @@ export const AdminDepositCreditsEmail = (data: any) => {
 };
 
 export const AdminFreeCreditsEmail = (data: any) => {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://cricvista.netlify.app";
+  const appUrl =
+    process.env.NEXT_PUBLIC_APP_URL || "https://www.cricvista247.in";
 
   return EmailLayout({
     title: "Free Credits Added",
@@ -142,7 +155,10 @@ export const AdminFreeCreditsEmail = (data: any) => {
       ${EmailTitle("You&#39;ve Received Free Credits! 🎁")}
       ${EmailText("Great news! Free credits have been added to your CricVista account as a special offer. Use them to unlock premium analytics and insights.")}
       ${EmailInfoCard([
-        { label: "Credits Added", value: `${data.totalCreditsAdded || data.credits || 0} Credits` },
+        {
+          label: "Credits Added",
+          value: `${data.totalCreditsAdded || data.credits || 0} Credits`,
+        },
         { label: "Offer", value: data.offerName || "Special Promotion" },
         { label: "Date", value: data.date || new Date().toLocaleDateString() },
       ])}
