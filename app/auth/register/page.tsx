@@ -379,6 +379,9 @@ const RegisterPage = () => {
                     Enter the 6-digit code sent to{" "}
                     <span className="text-blue-500">{email}</span>
                   </p>
+                  <p className="text-xs text-amber-600 text-center font-medium">
+                    Can't find the email? Check your spam folder.
+                  </p>
                 </div>
 
                 <Button
