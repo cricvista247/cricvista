@@ -15,6 +15,7 @@ import { useQuery } from "@tanstack/react-query";
 import MatchCard from "./MatchCard";
 import { FetchMatchList, FetchPlatformPerformance } from "../MainService";
 import toast from "react-hot-toast";
+import AdBanner from "@/components/AdBanner";
 
 // Enhanced Tab configuration
 const TAB_CONFIG = [
@@ -165,23 +166,46 @@ const MatchesPage = () => {
     </div>
   );
 
-  // Render tab content
+  // Render tab content — injects an ad unit after every 6th match card
   const renderTabContent = (tabId: string) => {
     if (filteredMatches.length === 0) {
       const tabConfig = TAB_CONFIG.find((tab) => tab.id === tabId);
       return <EmptyState {...tabConfig?.emptyState} />;
     }
 
+    const AD_INTERVAL = 6; // show ad after every N cards
+    const items: React.ReactNode[] = [];
+
+    filteredMatches.forEach((match: any, index: number) => {
+      items.push(
+        <MatchCard
+          key={match._id}
+          match={match}
+          showPredictButton={tabId === "upcoming" || tabId === "live"}
+          onClick={() => handleMatchClick(match)}
+        />
+      );
+
+      // Insert a full-width ad banner after every AD_INTERVAL cards
+      if ((index + 1) % AD_INTERVAL === 0 && index < filteredMatches.length - 1) {
+        items.push(
+          <div
+            key={`ad-${index}`}
+            className="col-span-1 md:col-span-2 lg:col-span-3"
+          >
+            <AdBanner
+              adSlot="2957912516"
+              adFormat="horizontal"
+              className="my-2"
+            />
+          </div>
+        );
+      }
+    });
+
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-        {filteredMatches.map((match: any) => (
-          <MatchCard
-            key={match._id}
-            match={match}
-            showPredictButton={tabId === "upcoming" || tabId === "live"}
-            onClick={() => handleMatchClick(match)}
-          />
-        ))}
+        {items}
       </div>
     );
   };
@@ -246,7 +270,7 @@ const MatchesPage = () => {
         )} */}
 
         {/* Search + Date Filter */}
-        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-200 mb-6 md:mb-10">
+        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-200 mb-4">
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
@@ -277,6 +301,13 @@ const MatchesPage = () => {
             </div>
           </div>
         </div>
+
+        {/* AdSense — Leaderboard between filters and match list */}
+        <AdBanner
+          adSlot="2957912516"
+          adFormat="horizontal"
+          className="mb-6 md:mb-8"
+        />
 
         {/* Enhanced Tabs using the new component */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">

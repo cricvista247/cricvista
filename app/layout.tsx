@@ -12,6 +12,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import ReactQueryProvider from "@/lib/ReactQueryProvider";
 import SocketListener from "@/lib/SocketListener";
 import FloatingChatWidget from "@/components/FloatingChatWidget";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Google AdSense — loads after page is interactive to avoid blocking render */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3220405841079438"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
       <body className={inter.className}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
