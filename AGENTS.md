@@ -78,3 +78,24 @@
 - `MailSend.ts` tries SendGrid first (if `SENDGRID_API_KEY` set), falls back to SMTP.
 - SendGrid handles DKIM signing automatically.
 - The word "Unlock" is a known spam trigger — all subjects now avoid marketing language.
+
+## 2026-07-21 — Google AdSense Integration
+
+### Changes
+
+| File | Change |
+|---|---|
+| `public/ads.txt` | [NEW] Google-required domain ownership file: `google.com, pub-3682863880846711, DIRECT, f08c47fec0942fa0` |
+| `components/AdBanner.tsx` | [NEW] Reusable `<AdBanner>` component — wraps `<ins class="adsbygoogle">`, calls `adsbygoogle.push({})` on mount, suppresses ads for `role === "admin"` users, prevents double-init via `useRef` guard |
+| `app/layout.tsx` | Added `<Script>` from `next/script` with `strategy="afterInteractive"` loading `pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3682863880846711` |
+| `app/matches/page.tsx` | Added horizontal leaderboard `<AdBanner>` between filters and tab list; added in-feed ad after every 6th match card (full-width, spans all 3 columns) |
+| `components/Layout/Footer.tsx` | Added horizontal `<AdBanner>` above the footer divider line (visible on all pages) |
+| `.env` | Added `NEXT_PUBLIC_ADSENSE_CLIENT_ID=ca-pub-3682863880846711` |
+
+### Key details
+- Publisher ID: `ca-pub-3682863880846711`
+- Ad slot used (placeholder): `2957912516` — replace with real slot IDs from the AdSense dashboard after creating ad units
+- Ads are **hidden for admin users** (`role === "admin"` check in `AdBanner.tsx`)
+- Ads will appear **empty on localhost** — this is normal; Google only serves real ads to approved, publicly accessible domains
+- **Action required**: Submit site at https://adsense.google.com for approval if not done already
+- **Action required**: Create ad units in the AdSense dashboard and replace `2957912516` with the actual slot IDs

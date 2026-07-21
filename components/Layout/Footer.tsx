@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import AdBanner from "@/components/AdBanner";
 import {
   Trophy,
   Twitter,
@@ -255,6 +256,13 @@ const Footer = () => {
             </form> */}
           </div>
         </div>
+
+        {/* AdSense — responsive banner above footer bottom bar */}
+        <AdBanner
+          adSlot="2957912516"
+          adFormat="horizontal"
+          className="mb-8"
+        />
 
         <div className="h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent my-12" />
 
