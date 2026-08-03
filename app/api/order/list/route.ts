@@ -41,6 +41,11 @@ export const POST = async (request: NextRequest) => {
         orderNumber: { $regex: reqData.orderNumber, $options: "i" },
       });
     }
+    if (reqData.hasOwnProperty("userId") && reqData.userId) {
+      query.push({
+        userId: new mongoose.Types.ObjectId(reqData.userId),
+      });
+    }
 
     let pipeline: any[] = [
       {
@@ -68,12 +73,6 @@ export const POST = async (request: NextRequest) => {
         },
       },
     ];
-
-    if (reqData.hasOwnProperty("userId") && reqData.userId) {
-      query.push({
-        userId: new mongoose.Types.ObjectId(reqData.userId),
-      });
-    }
 
     const count = await Order.aggregate([...pipeline, { $count: "total" }]);
     const total = count.length > 0 ? count[0].total : 0;
