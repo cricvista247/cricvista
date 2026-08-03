@@ -7,7 +7,12 @@ import { FormatErrorMessage } from "@/lib/utils";
 export const POST = async (request: NextRequest) => {
   try {
     const cookies = parse(request.headers.get("cookie") || "");
-    const refreshToken = cookies.refreshToken;
+    // Browsers use the HttpOnly cookie. Native mobile clients cannot reliably
+    // read or resend that cookie, so they may send the same token in JSON.
+    const body = (await request.json().catch(() => ({}))) as {
+      refreshToken?: string;
+    };
+    const refreshToken = cookies.refreshToken || body.refreshToken;
 
     if (!refreshToken) {
       return NextResponse.json(
@@ -18,7 +23,7 @@ export const POST = async (request: NextRequest) => {
 
     const { payload } = await jwtVerify(refreshToken, SECRET_KEY);
 
-    const newAccessToken = await generateToken({ ...payload }, "20d");
+    const newAccessToken = await generateToken({ ...payload }, "15m");
 
     const newRefreshToken = await generateToken({ ...payload }, "30d");
 
@@ -28,12 +33,13 @@ export const POST = async (request: NextRequest) => {
       secure: process.env.NODE_ENV === "production" ? true : false, // allow insecure on localhost
       sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax", // safe for local dev
       path: "/",
-      maxAge: 60 * 60 * 24, // 1 day
+      maxAge: 60 * 60 * 24 * 30, // 30 days
     });
     const response = NextResponse.json(
       {
         status: true,
         accessToken: newAccessToken,
+        refreshToken: newRefreshToken,
         message: "Token generated successfully",
       },
       { status: 200 },

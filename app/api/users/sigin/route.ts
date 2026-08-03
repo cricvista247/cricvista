@@ -87,12 +87,13 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       {
-        success: true,
-        message: "Login successful.",
-        data: {
-          user: { ...prepareResponse, _id: user._id },
-          token: accessToken,
-        },
+          success: true,
+          message: "Login successful.",
+          data: {
+            user: { ...prepareResponse, _id: user._id },
+            token: accessToken,
+            refreshToken,
+          },
       },
       {
         status: 200,
