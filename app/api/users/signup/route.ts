@@ -201,6 +201,7 @@ export async function POST(request: NextRequest) {
               data: {
                 user: userData,
                 token: accessToken,
+                refreshToken,
               },
             },
             {
